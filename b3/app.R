@@ -10,19 +10,23 @@ ui <- fluidPage(
     titlePanel("Iris"),
 
     # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
+        fluidRow(
+        column(4,
             selectInput("Species",
                         "Iris Species",
                         c("setosa","versicolor","virginica"))
         ),
 
         # Show a plot of the generated distribution
-        mainPanel(
+        column(8,
           plotOutput("irisPlot")
           
         )
-    )
+    ),
+    fluidRow(
+      column(12,
+             img(src='iris.png', align = "right")
+    ))
 )
 
 # Define server logic required to draw a histogram
@@ -31,8 +35,7 @@ server <- function(input, output) {
   output$irisPlot <- renderPlot({
       iris1 <- filter(iris, Species == input$Species)
       ggplot(iris1, aes(x=Petal.Length, y=Sepal.Width)) +
-      geom_point(color="deepskyblue4", position = "jitter") +
-        geom_smooth(method = lm, alpha = .25, color="cornflowerblue", level=0)
+      geom_point(color="deepskyblue4", position = "jitter") 
                   
     })
 }

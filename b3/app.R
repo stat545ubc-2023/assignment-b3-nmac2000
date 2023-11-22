@@ -29,7 +29,7 @@ ui <- fluidPage(
     ))
 )
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw a plot
 server <- function(input, output) {
 
   output$irisPlot <- renderPlot({
